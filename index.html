@@ -125,7 +125,7 @@ img{display:block;max-width:100%}
 .jg::after{content:"";flex-grow:1000000}
 .jg.js{display:block}
 .jg.js::after{display:none}
-.jg.js .row{display:flex;gap:6px;justify-content:center;margin-bottom:6px}
+.jg.js .row{display:flex;gap:6px;margin-bottom:6px}
 .jg.js .ph{flex:none;aspect-ratio:auto}
 .ph{position:relative;flex-grow:calc(var(--ar) * 100);flex-basis:calc(var(--ar) * 270px);aspect-ratio:var(--ar);overflow:hidden;background:var(--bg-2);cursor:zoom-in}
 .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .4s}
@@ -480,11 +480,13 @@ function layout(){
     const items = [...g.querySelectorAll('.ph')];
     g.classList.add('js');
     const W = g.clientWidth, gap = 6, mobile = W < 640;
-    const target = mobile ? 200 : 420, maxH = mobile ? 420 : 620, maxPer = mobile ? 2 : 4;
+    const target = mobile ? 220 : 440, maxH = mobile ? 460 : 640, maxPer = mobile ? 3 : 6;
     const ars = items.map(b => +b.style.getPropertyValue('--ar'));
     const total = ars.reduce((a,b) => a+b, 0);
-    let k = Math.max(1, Math.round(total * target / W), Math.ceil(items.length / maxPer));
-    k = Math.min(k, items.length);
+    // rows always span the full width; pick a row count that keeps each row between target and maxH tall
+    const kMax = Math.max(1, Math.floor(total * maxH / W));
+    let k = Math.max(Math.round(total * target / W), Math.ceil(items.length / maxPer), 1);
+    k = Math.min(k, kMax, items.length);
     // linear partition: split the sequence into k rows with the most even widths
     const n = ars.length, pre = [0]; ars.forEach(a => pre.push(pre[pre.length-1] + a));
     const cost = Array.from({length:n+1}, () => Array(k+1).fill(Infinity)), cut = Array.from({length:n+1}, () => Array(k+1).fill(0));
@@ -499,7 +501,7 @@ function layout(){
     rows.forEach(r => {
       const row = document.createElement('div'); row.className = 'row';
       const sum = r.reduce((a,b) => a + +b.style.getPropertyValue('--ar'), 0);
-      const h = Math.min(maxH, (W - gap*(r.length-1)) / sum);
+      const h = (W - gap*(r.length-1)) / sum;
       r.forEach(b => { const ar = +b.style.getPropertyValue('--ar'); b.style.width = (h*ar) + 'px'; b.style.height = h + 'px'; row.appendChild(b); });
       g.appendChild(row);
     });
