@@ -158,6 +158,8 @@ img{display:block;max-width:100%}
 #contacto .h-sec{margin-bottom:22px}
 #contacto p.txt{color:var(--muted);max-width:480px;margin:0 auto 38px;line-height:1.75}
 .cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;align-items:stretch}
+.contact-line{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 24px;margin-bottom:24px;font-family:var(--mono);font-size:15px;color:var(--ink);user-select:all}
+.contact-line span{user-select:text}
 footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:24px var(--pad);border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 
 /* ── lightbox ── */
@@ -188,7 +190,24 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;paddin
   .topbar .pill.solid{display:none}
   .hero-name{font-size:23vw}
   .hero-cap{left:18px;right:auto;text-align:left;bottom:auto;top:76px}
-  .tiles{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr 1fr;gap:5px}
+  .tile{aspect-ratio:4/5}
+  .tile-label{padding:12px;gap:8px;flex-wrap:wrap}
+  .tile-label span:nth-child(2){font-size:22px}
+  .tile-label .cnt{display:none}
+  .hero-cta{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .hero-cta .pill{min-height:46px;padding:0 12px}
+  .hero-cta .pill:first-child{grid-column:1/-1}
+  .hero-sub{font-size:15px}
+  .hero-copy{right:18px}
+  #contacto .giant{display:none}
+  .contact-line{flex-direction:column;font-size:14px}
+  .cta-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:420px;margin:0 auto}
+  .cta-row .pill:first-child,.cta-row .pill:last-child{grid-column:1/-1}
+  .work-head{margin-bottom:22px}
+  .sport{padding-top:56px}
+  .sport-title{font-size:56px}
+  footer{flex-direction:column;gap:6px}
   .sport-head{grid-template-columns:auto 1fr}
   .sport-cnt{grid-row:auto;grid-column:2}
   .ph{flex-basis:calc(var(--ar) * 130px)}
@@ -366,7 +385,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;paddin
   <p class="mono kicker" data-es="Disponible para proyectos" data-en="Available for projects">Disponible para proyectos</p>
   <h2 class="h-sec" data-es="Hablemos." data-en="Let's talk.">Hablemos.</h2>
   <p class="txt" data-es="Cobertura de partidos y eventos, contenido para redes de clubes y producción de video." data-en="Game and event coverage, social content for clubs, and video production.">Cobertura de partidos y eventos, contenido para redes de clubes y producción de video.</p>
-  <p class="mono" style="color:var(--ink);margin-bottom:22px;letter-spacing:.1em;text-transform:none;font-size:15px">anaestrgz@gmail.com · +52 614 602 6040</p>
+  <p class="contact-line"><span>anaestrgz@gmail.com</span><span>+52 614 602 6040</span></p>
   <div class="cta-row">
     <a class="pill solid" href="mailto:anaestrgz@gmail.com?subject=Cobertura%20deportiva" data-es="Escríbeme" data-en="Email me">Escríbeme</a>
     <a class="pill line" href="https://www.instagram.com/anawithacamera_" target="_blank" rel="noopener">Instagram</a>
